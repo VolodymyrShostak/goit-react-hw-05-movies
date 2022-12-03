@@ -1,6 +1,6 @@
 import React from 'react';
 import { Searchbar } from '../components/Searchbar/Searchbar'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 // import { useState, useEffect } from 'react';
 
 

@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import { WrapperSearchbar, SearchForm, SearchFormInput,SearchFormButton,SearchFormButtonLabel } from './styled.js';
 
@@ -46,6 +46,6 @@ const onChange = e => {
   }
 
 
-Searchbar.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
+// Searchbar.propTypes = {
+//   onSubmit: PropTypes.func.isRequired,
+// };

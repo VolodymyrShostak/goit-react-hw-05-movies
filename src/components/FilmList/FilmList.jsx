@@ -1,26 +1,50 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 // import { FilmItem } from '../ImageGalleryItem/ImageGalleryItem';
-import { Wrapper } from './styled';
-import { FilmItem } from '../FilmItem/FilmItem'
+import { Wrapper, Title, Link } from './styled';
+import { FilmItem } from '../FilmItem/FilmItem';
+import { useState, useEffect } from 'react';
+import { GeterTrendFilms } from '../api';
 
-export const FilmList = ({ pictures, onClick = () => {} }) => {
+const FilmList = () => {
+  const [films, setFilms] = useState([]);
+
+  
+  console.log(GeterTrendFilms());
+
+  useEffect(() => {
+    async function getFilms() {
+      try {
+          const data = await GeterTrendFilms();
+          
+          console.log(data);
+          
+        setFilms(data.results);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getFilms();
+  }, []);
+
+  console.log(films);
+
   return (
     <Wrapper>
-      {pictures.map(({ id, webformatURL, largeImageURL, tags }) => (
-        <FilmItem
-          key={id}
-          webformatURL={webformatURL}
-          largeImageURL={largeImageURL}
-          tags={tags}
-          onClick={onClick}
-        />
-      ))}
+      <Title>Trending today</Title>
+      <ul>
+        {films.map(film => {
+          return (
+            <FilmItem key={film.id}>
+              <Link to={`movie/${film.id}`}>{film.title}</Link>
+            </FilmItem>
+          );
+        })}
+      </ul>
     </Wrapper>
   );
 };
-
-FilmList.propTypes = {
-  pictures: PropTypes.array.isRequired,
-  onClick: PropTypes.func.isRequired,
-};
+export default FilmList;
+// FilmList.propTypes = {
+//   pictures: PropTypes.array.isRequired,
+//   onClick: PropTypes.func.isRequired,
+// };
