@@ -1,10 +1,13 @@
 // import styled from 'styled-components';
+import { AppBar } from "components/AppBar/AppBar";
+import { Outlet } from "react-router-dom";
+
 
 export const Layout = () => {
     return (
-      <div>
-        <div>Header</div>
-        <div>Content</div>
+      <div  >
+        <AppBar/>
+        <Outlet />
       </div>
     );
 }

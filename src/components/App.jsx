@@ -9,12 +9,11 @@ export const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Layout /> }></Route>
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/movies" element={<MoviesPage />} />
+        <Route path="/" element={<Layout />}>
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/movies" element={<MoviesPage />} />
+        </Route>
       </Routes>
     </>
   );
 };
-// 50f0044b98fb36babd948adb82a325bf
-// https://api.themoviedb.org/3/movie/550?api_key=50f0044b98fb36babd948adb82a325bf
