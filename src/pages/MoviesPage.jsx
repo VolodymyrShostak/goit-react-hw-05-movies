@@ -57,6 +57,7 @@ function MoviesPage() {
     <>
       <Searchbar />
       <ToastContainer autoClose={3000} />
+      
     </>
   ); 
 }

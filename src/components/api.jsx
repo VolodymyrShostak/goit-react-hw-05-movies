@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+export const apiURL = 'https://image.tmdb.org/t/p/w500';
+
  export const GeterTrendFilms= async() =>{
   try {
     const response = await axios.get(
@@ -17,21 +19,28 @@ import axios from 'axios';
       'https://api.themoviedb.org/3/search/movie?api_key=50f0044b98fb36babd948adb82a325bf&language=en-US&page=1&include_adult=false'
     );
     return response;
-  };
-
-export const GeterFilmDetailsInfo = async () => {
-   const response = await axios.get('https://api.themoviedb.org/3/movie/{movie_id}?api_key=50f0044b98fb36babd948adb82a325bf&language=en-US ')
-   return response;
 };
  
-export const GeterFilmActorsTeam = async () => {
-   const response = await axios.get('https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key=50f0044b98fb36babd948adb82a325bf&language=en-US ')
-   return response;
+
+export const GeterFilmDetailsInfo = async movieId => {
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/movie/${movieId}?api_key=50f0044b98fb36babd948adb82a325bf&language=en-US `
+  );
+  return response;
+};
+ 
+export const GeterFilmActorsTeam = async movieId => {
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=50f0044b98fb36babd948adb82a325bf&language=en-US `
+  );
+  return response;
 };
 
-export const GeterCommentsFilm = async () => {
-   const response = await axios.get('https://api.themoviedb.org/3/movie/{movie_id}/reviews?api_key=<<api_key>>&language=en-US&page=1 ')
-   return response;
+export const GeterReviewsFilm = async movieId => {
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=50f0044b98fb36babd948adb82a325bf&language=en-US&page=1 `
+  );
+  return response;
 };
 
 

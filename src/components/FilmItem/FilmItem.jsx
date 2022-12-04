@@ -2,10 +2,10 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import { StyledFilm } from './styled.js';
 
-export const FilmItem =( )=>{
+export const FilmItem =()=>{
     return (
    
-        <StyledFilm />
+        <StyledFilm >{}</StyledFilm>
         
     )
 };

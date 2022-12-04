@@ -1,22 +1,20 @@
 // import PropTypes from 'prop-types';
 // import { FilmItem } from '../ImageGalleryItem/ImageGalleryItem';
-import { Wrapper, Title, Link } from './styled';
-import { FilmItem } from '../FilmItem/FilmItem';
+import { StyledLink} from './styled';
+// import { FilmItem } from '../FilmItem/FilmItem';
 import { useState, useEffect } from 'react';
 import { GeterTrendFilms } from '../api';
 
+
+
 const FilmList = () => {
-  const [films, setFilms] = useState([]);
-
-  
-  console.log(GeterTrendFilms());
-
+    const [films, setFilms] = useState([]);
+    
   useEffect(() => {
     async function getFilms() {
       try {
-          const data = await GeterTrendFilms();
-          
-          console.log(data);
+          const { data } = await GeterTrendFilms();
+               
           
         setFilms(data.results);
       } catch (error) {
@@ -25,22 +23,20 @@ const FilmList = () => {
     }
     getFilms();
   }, []);
-
-  console.log(films);
-
+console.log(films)
   return (
-    <Wrapper>
-      <Title>Trending today</Title>
+    <>
+      <h1>Trending today</h1>
       <ul>
-        {films.map(film => {
-          return (
-            <FilmItem key={film.id}>
-              <Link to={`movie/${film.id}`}>{film.title}</Link>
-            </FilmItem>
-          );
-        })}
+        {films.map(film => (
+          <li key={film.id}>
+            <StyledLink to={`/movies/${film.id}`}>
+              {film.title || film.name}
+            </StyledLink>
+          </li>
+        ))}
       </ul>
-    </Wrapper>
+    </>
   );
 };
 export default FilmList;
