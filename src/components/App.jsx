@@ -5,7 +5,7 @@ import MoviesPage from '../pages/MoviesPage';
 import MovieDetails from '../pages/MovieDetails/MovieDetails';
 import MovieDetailsCast from './MovieDetailsCast/MovieDetailsCast';
 import { Layout } from './Layout/Layout';
-import { FilmItem } from '../pages/MovieDetails/MovieDetails';
+// import { FilmItem } from '../pages/MovieDetails/MovieDetails';
 
 // import MovieDetailsCast from '../components/MovieDetailsCast';
 // import MovieDetailsReviews from '../components/MovieDetailsReviews';

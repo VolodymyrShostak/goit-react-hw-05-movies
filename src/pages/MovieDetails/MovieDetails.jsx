@@ -1,11 +1,11 @@
-import React, { useState, useEffect,Link } from 'react';
+import React, { useState, useEf } from 'react';
 import { useParams, Outlet } from 'react-router-dom';
 import { apiURL, GeterFilmDetailsInfo } from '../../components/api';
 import {
   Wrapper,
-  Image,
-  Desc,
-  TextWrap,
+  Poster,
+  Description,
+  Text,
   Title,
   
 } from './styled'
@@ -36,7 +36,7 @@ function MovieDetails() {
 
   return (
     <Wrapper>
-      <Image
+      <Poster
         src={
           poster_path ? apiURL + poster_path : 'Poster not available'
 
@@ -44,22 +44,22 @@ function MovieDetails() {
         }
         alt={title}
       />
-      <Desc>
+      <Description>
         <Title>{title}</Title>
 
         <p>{overview}</p>
 
         <p>
-          <TextWrap>Genres: </TextWrap>
+          <Text>Genres: </Text>
           {genres ? genres.map(gen => gen.name).join(', ') : ''}
         </p>
         <p>
-          <TextWrap>Release Date: </TextWrap> {release_date}
+          <Text>Release Date: </Text> {release_date}
         </p>
         <p>
-          <TextWrap>Rating: </TextWrap> {vote_average}
+          <Text>Rating: </Text> {vote_average}
         </p>
-      </Desc>
+      </Description>
 
       {/* <WrapperBtn>
         <Link to="cast" >
