@@ -14,11 +14,13 @@ export const apiURL = 'https://image.tmdb.org/t/p/w500';
      
      }
 
-  export const GeterFilmsByKeyWord = async (search) => {
-    const response = await axios.get(
-      `https://api.themoviedb.org/3/${search}/movie?api_key=50f0044b98fb36babd948adb82a325bf&language=en-US&page=1&include_adult=false`
-    );
-    return response;
+export const GeterFilmsByKeyWord = async (search) => {
+    try {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/search/movie?api_key=50f0044b98fb36babd948adb82a325bf&query=${search}&page=1&language=en-US`
+      );
+      return response;
+    } catch (error) {}
 };
  
 

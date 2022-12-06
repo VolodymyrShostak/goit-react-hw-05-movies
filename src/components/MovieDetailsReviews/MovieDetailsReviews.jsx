@@ -1,52 +1,60 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { apiURL, GeterReviewsFilm } from '../api';
-
+import {  GeterReviewsFilm } from '../api';
 
 // import PropTypes from 'prop-types';
 
 function MovieDetailsReviews() {
-    const { movieId } = useParams();
-    const [movie, setMovie] = useState('');
+  const { movieId } = useParams();
+  const [reviews, setReviews] = useState([]);
 
-    useEffect(() => {
-        async function getFilm(movieId) {
-            try {
-                const { data } = await GeterReviewsFilm(movieId);
+  useEffect(() => {
+    async function getFilm(movieId) {
+      try {
+        const { data } = await GeterReviewsFilm(movieId);
 
-                setMovie(data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        getFilm(movieId);
-    }, [movieId]);
-    useEffect(() => {
-        console.log(movie);
-    }, [movie]);
+        setReviews(data.results);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getFilm(movieId);
+  }, [movieId]);
 
-    const { profile_path, original_name, character,cast } = movie;
+
+ 
 
     return (
       <>
-            {cast.map(actor => {
-                return (
-                  (
-                    <img
-                      src={
-                        profile_path
-                          ? apiURL + profile_path
-                          : 'Poster not available'
-                      }
-                      alt="actor"
-                    />
-                  ),
-                  (<p>{original_name}</p>),
-                  (<p>{character}</p>)
-                ); })
-        }
+       {
+  !reviews.length > 0 ? (
+    <h1>No reviews</h1>
+  ) : (
+    <ul>
+     
+      {reviews.map(review => (
+        <li key={review.id} review={review} >
+          <p>{review.author}</p>
+          <p>{review.content}</p>
+          </li>
+      ))}
+    </ul>
+  )
+}
       </>
     );
 }
 
 export default MovieDetailsReviews;
+// {
+//   !reviews.length > 0 ? (
+//     <TitleReviews>No reviews</TitleReviews>
+//   ) : (
+//     <ListReviews>
+//       <TitleReviews>Users reviews</TitleReviews>
+//       {reviews.map(review => (
+//         <ReviewsItem key={review.id} review={review} />
+//       ))}
+//     </ListReviews>
+//   );
+// }

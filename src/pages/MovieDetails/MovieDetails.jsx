@@ -1,5 +1,5 @@
-import React, { useState, useEf } from 'react';
-import { useParams, Outlet } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, Outlet, NavLink, useLocation} from 'react-router-dom';
 import { apiURL, GeterFilmDetailsInfo } from '../../components/api';
 import {
   Wrapper,
@@ -7,13 +7,17 @@ import {
   Description,
   Text,
   Title,
-  
-} from './styled'
+  WrapperLink,
+  Title2,
+  BackToButton
+} from './styled';
 
 // import PropTypes from 'prop-types';
 function MovieDetails() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState('');
+  const location = useLocation();
+   const linkBack = location.state.from ;
 
   useEffect(() => {
     async function getFilm(movieId) {
@@ -27,51 +31,50 @@ function MovieDetails() {
     }
     getFilm(movieId);
   }, [movieId]);
-  useEffect(() => {
-    console.log(movie);
-  }, [movie]);
 
   const { title, overview, genres, release_date, vote_average, poster_path } =
     movie;
 
   return (
-    <Wrapper>
-      <Poster
-        src={
-          poster_path ? apiURL + poster_path : 'Poster not available'
+    <>
+      <BackToButton type='button' to={linkBack}>{`<< Back To`}</BackToButton>
+      <Wrapper>
+        <Poster
+          src={
+            poster_path ? apiURL + poster_path : 'Poster not available'
 
-          //     }
-        }
-        alt={title}
-      />
-      <Description>
-        <Title>{title}</Title>
+            //     }
+          }
+          alt={title}
+        />
+        <Description>
+          <Title>{title}</Title>
 
-        <p>{overview}</p>
+          <p>{overview}</p>
 
-        <p>
-          <Text>Genres: </Text>
-          {genres ? genres.map(gen => gen.name).join(', ') : ''}
-        </p>
-        <p>
-          <Text>Release Date: </Text> {release_date}
-        </p>
-        <p>
-          <Text>Rating: </Text> {vote_average}
-        </p>
-      </Description>
-
-      {/* <WrapperBtn>
-        <Link to="cast" >
+          <p>
+            <Text>Genres: </Text>
+            {genres ? genres.map(gen => gen.name).join(', ') : ''}
+          </p>
+          <p>
+            <Text>Release Date: </Text> {release_date}
+          </p>
+          <p>
+            <Text>Rating: </Text> {vote_average}
+          </p>
+        </Description>
+      </Wrapper>
+      <Title2>Additional Information</Title2>
+      <WrapperLink>
+        <NavLink to="cast" state={{ from: location }}>
           Cast
-        </Link> */}
-      {/* <Link to="reviews" >
+        </NavLink>
+        <NavLink to="reviews" state={{ from: location }}>
           Reviews
-        </Link> */}
-      {/* </WrapperBtn> */}
-
+        </NavLink>
+      </WrapperLink>
       <Outlet />
-    </Wrapper>
+    </>
   );
 }
 

@@ -4,7 +4,11 @@ import HomePage from '../pages/HomePage';
 import MoviesPage from '../pages/MoviesPage';
 import MovieDetails from '../pages/MovieDetails/MovieDetails';
 import MovieDetailsCast from './MovieDetailsCast/MovieDetailsCast';
+import MovieDetailsReviews from './MovieDetailsReviews/MovieDetailsReviews';
+
 import { Layout } from './Layout/Layout';
+
+
 // import { FilmItem } from '../pages/MovieDetails/MovieDetails';
 
 // import MovieDetailsCast from '../components/MovieDetailsCast';
@@ -19,10 +23,10 @@ export const App = () => {
           <Route path="/movies" element={<MoviesPage />} />
           <Route path="/movies/:movieId" element={<MovieDetails />}>
             <Route path="cast" element={<MovieDetailsCast />} />
-            {/* <Route
-              path="reviews" */}
-              {/* // element={<MovieDetailsReviews />} */}
-            {/* /> */}
+            <Route
+              path="reviews"
+              element={<MovieDetailsReviews />}
+             />
           </Route>
         </Route>
         {/* </Route> */}

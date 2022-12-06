@@ -1,30 +1,37 @@
-import {useState} from 'react';
+import { useState } from 'react';
 // import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
-import { WrapperSearchbar, SearchForm, SearchFormInput,SearchFormButton,SearchFormButtonLabel } from './styled.js';
+import {
+  WrapperSearchbar,
+  SearchForm,
+  SearchFormInput,
+  SearchFormButton,
+  SearchFormButtonLabel,
+} from './styled.js';
 
-export  function Searchbar({ onSubmit }) {
-  const [search, setSearch] = useState('') 
+export const Searchbar = ({onSubmit}) => {
+  const [search, setSearch] = useState('');
 
-const onChange = e => {
+  const onChange = e => {
     const { value } = e.currentTarget;
     setSearch(value.trim());
   };
 
-  
   const onHandleSubmit = e => {
     e.preventDefault();
     if (search.trim() === '') {
       toast.warning('Please, enter a keyword...');
       return;
     }
-  
-    onSubmit(search);
-   setSearch('');
+    onSubmit(search)
   };
 
-  
-    return (
+  // const onSubmit = ({ search }) => {
+  //   setSearch(search);
+  // };
+
+  return (
+    <>
       <WrapperSearchbar>
         <SearchForm onSubmit={onHandleSubmit}>
           <SearchFormButton type="submit">
@@ -42,10 +49,9 @@ const onChange = e => {
           />
         </SearchForm>
       </WrapperSearchbar>
-    );
-  }
-
-
+    </>
+  );
+};
 // Searchbar.propTypes = {
 //   onSubmit: PropTypes.func.isRequired,
 // };
