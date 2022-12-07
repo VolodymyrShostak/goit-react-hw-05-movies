@@ -1,6 +1,8 @@
-import React, { useState, useEffect, Suspense} from 'react';
+import { Loader } from 'components/Loader/Loader';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useParams, Outlet, NavLink, useLocation } from 'react-router-dom';
 import { apiURL, GeterFilmDetailsInfo } from '../../components/api';
+
 import {
   Wrapper,
   Poster,
@@ -11,7 +13,6 @@ import {
   Title2,
   BackToButton,
 } from './styled';
-
 
 function MovieDetails() {
   const { movieId } = useParams();
@@ -38,28 +39,30 @@ function MovieDetails() {
   return (
     <>
       <BackToButton type="button" to={linkBack}>{`<< Back To`}</BackToButton>
-      {movie && (<Wrapper>
-        <Poster
-          src={poster_path ? apiURL + poster_path : 'Poster not available'}
-          alt={title}
-        />
-        <Description>
-          <Title>{title}</Title>
+      {movie && (
+        <Wrapper>
+          <Poster
+            src={poster_path ? apiURL + poster_path : 'Poster not available'}
+            alt={title}
+          />
+          <Description>
+            <Title>{title}</Title>
 
-          <p>{overview}</p>
+            <p>{overview}</p>
 
-          <p>
-            <Text>Genres: </Text>
-            {genres ? genres.map(gen => gen.name).join(', ') : ''}
-          </p>
-          <p>
-            <Text>Release Date: </Text> {release_date}
-          </p>
-          <p>
-            <Text>Rating: </Text> {vote_average}
-          </p>
-        </Description>
-      </Wrapper>)}
+            <p>
+              <Text>Genres: </Text>
+              {genres ? genres.map(gen => gen.name).join(', ') : ''}
+            </p>
+            <p>
+              <Text>Release Date: </Text> {release_date}
+            </p>
+            <p>
+              <Text>Rating: </Text> {vote_average}
+            </p>
+          </Description>
+        </Wrapper>
+      )}
       <Title2>Additional Information</Title2>
       <WrapperLink>
         <NavLink to="cast" state={{ from: location.state?.from }}>
@@ -69,7 +72,7 @@ function MovieDetails() {
           Reviews
         </NavLink>
       </WrapperLink>
-      <Suspense fallback={null}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </>
