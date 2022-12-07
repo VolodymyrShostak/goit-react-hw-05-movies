@@ -26,24 +26,30 @@ export const GeterFilmsByKeyWord = async (search) => {
  
 
 export const GeterFilmDetailsInfo = async movieId => {
+    try {
   const response = await axios.get(
     `https://api.themoviedb.org/3/movie/${movieId}?api_key=50f0044b98fb36babd948adb82a325bf&language=en-US `
-  );
-  return response;
+    );
+      return response;
+    } catch (error) {}
 };
  
-export const GeterFilmActorsTeam = async movieId => {
+  export const GeterFilmActorsTeam = async movieId => {
+    try {
   const response = await axios.get(
     `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=50f0044b98fb36babd948adb82a325bf&language=en-US `
-  );
-  return response;
+    );
+      return response;
+    } catch (error) {}
 };
 
-export const GeterReviewsFilm = async movieId => {
-  const response = await axios.get(
-    `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=50f0044b98fb36babd948adb82a325bf&language=en-US&page=1 `
-  );
-  return response;
+    export const GeterReviewsFilm = async movieId => {
+    try {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=50f0044b98fb36babd948adb82a325bf&language=en-US&page=1 `
+      );
+      return response;
+    } catch (error) {}
 };
 GeterFilmsByKeyWord.propTypes = {
   search: PropTypes.string.isRequired,
