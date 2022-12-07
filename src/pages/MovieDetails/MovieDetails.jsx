@@ -18,7 +18,7 @@ function MovieDetails() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState('');
   const location = useLocation();
-  const linkBack = location?.state?.from;
+  const linkBack = location?.state?.from || '/';
 
   useEffect(() => {
     async function getFilm(movieId) {
