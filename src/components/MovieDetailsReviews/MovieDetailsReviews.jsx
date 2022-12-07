@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {  GeterReviewsFilm } from '../api';
 
-// import PropTypes from 'prop-types';
 
 function MovieDetailsReviews() {
   const { movieId } = useParams();
@@ -20,9 +19,6 @@ function MovieDetailsReviews() {
     }
     getFilm(movieId);
   }, [movieId]);
-
-
- 
 
     return (
       <>
@@ -46,15 +42,3 @@ function MovieDetailsReviews() {
 }
 
 export default MovieDetailsReviews;
-// {
-//   !reviews.length > 0 ? (
-//     <TitleReviews>No reviews</TitleReviews>
-//   ) : (
-//     <ListReviews>
-//       <TitleReviews>Users reviews</TitleReviews>
-//       {reviews.map(review => (
-//         <ReviewsItem key={review.id} review={review} />
-//       ))}
-//     </ListReviews>
-//   );
-// }

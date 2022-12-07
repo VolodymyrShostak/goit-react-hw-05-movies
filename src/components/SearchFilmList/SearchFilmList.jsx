@@ -1,17 +1,12 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { StyledLink } from './styled';
-// import { FilmItem } from '../FilmItem/FilmItem';
-// import { useState, useEffect } from 'react';
-// import { GeterFilmsByKeyWord } from '../api';
-// import { keyWord } from 'components/Searchbar/Searchbar';
 
+             
 const FilmList = ({ films }) => {
-  const location = useLocation(); 
-  
-
-  
-  console.log(films);
+  const location = useLocation();
+    
+  console.log(location)
   return (
     <>
       <ul>
@@ -21,6 +16,7 @@ const FilmList = ({ films }) => {
               <StyledLink to={`/movies/${film.id}`} state={{ from: location }}>
                 {film.title || film.name}
               </StyledLink>
+              
             </li>
           ))}
       </ul>
@@ -28,7 +24,8 @@ const FilmList = ({ films }) => {
   );
 };
 export default FilmList;
-// FilmList.propTypes = {
-//   pictures: PropTypes.array.isRequired,
-//   onClick: PropTypes.func.isRequired,
-// };
+
+FilmList.propTypes = {
+  films: PropTypes.array.isRequired,
+  
+};

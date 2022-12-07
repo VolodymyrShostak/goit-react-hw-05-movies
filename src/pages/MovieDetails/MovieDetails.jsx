@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Outlet, NavLink, useLocation} from 'react-router-dom';
+import React, { useState, useEffect, Suspense} from 'react';
+import { useParams, Outlet, NavLink, useLocation } from 'react-router-dom';
 import { apiURL, GeterFilmDetailsInfo } from '../../components/api';
 import {
   Wrapper,
@@ -9,15 +9,15 @@ import {
   Title,
   WrapperLink,
   Title2,
-  BackToButton
+  BackToButton,
 } from './styled';
 
-// import PropTypes from 'prop-types';
+
 function MovieDetails() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState('');
   const location = useLocation();
-   const linkBack = location.state.from ;
+  const linkBack = location.state.from;
 
   useEffect(() => {
     async function getFilm(movieId) {
@@ -37,14 +37,10 @@ function MovieDetails() {
 
   return (
     <>
-      <BackToButton type='button' to={linkBack}>{`<< Back To`}</BackToButton>
-      <Wrapper>
+      <BackToButton type="button" to={linkBack}>{`<< Back To`}</BackToButton>
+      {movie && (<Wrapper>
         <Poster
-          src={
-            poster_path ? apiURL + poster_path : 'Poster not available'
-
-            //     }
-          }
+          src={poster_path ? apiURL + poster_path : 'Poster not available'}
           alt={title}
         />
         <Description>
@@ -63,17 +59,19 @@ function MovieDetails() {
             <Text>Rating: </Text> {vote_average}
           </p>
         </Description>
-      </Wrapper>
+      </Wrapper>)}
       <Title2>Additional Information</Title2>
       <WrapperLink>
-        <NavLink to="cast" state={{ from: location }}>
+        <NavLink to="cast" state={{ from: location.state?.from }}>
           Cast
         </NavLink>
-        <NavLink to="reviews" state={{ from: location }}>
+        <NavLink to="reviews" state={{ from: location.state?.from }}>
           Reviews
         </NavLink>
       </WrapperLink>
-      <Outlet />
+      <Suspense fallback={null}>
+        <Outlet />
+      </Suspense>
     </>
   );
 }

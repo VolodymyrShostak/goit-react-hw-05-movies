@@ -1,16 +1,20 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
+import { useSearchParams } from 'react-router-dom';
 import { Searchbar } from '../components/Searchbar/Searchbar';
 import FilmList from '../components/SearchFilmList/SearchFilmList';
 import { GeterFilmsByKeyWord } from '../components/api';
-import { ToastContainer } from 'react-toastify';
-// import { SearchFilmList } from '../components/SearchFilmList/SearchFilmList'  
+import 'react-toastify/dist/ReactToastify.css';
+
+
+
 
 const FilmListBySearch = () => {
-  const [keyWord, setKeyWord] = useState('');
+  
   const [films, setFilms] = useState([]);
-  // const [loader, setLoader] = useState(false);
-
+  const [searchParams] = useSearchParams();
+ 
+const keyWord = searchParams.get('query') ?? '';
   useEffect(() => {
     if (!keyWord) return;
     async function getFilms(word) {
@@ -24,16 +28,16 @@ const FilmListBySearch = () => {
       
     }
     getFilms(keyWord);
-    // eslint-disable-next-line
+   
   }, [keyWord]);
 
   
 
   return (
     <>
-      <Searchbar onSubmit={setKeyWord} />
+      <Searchbar />
       <ToastContainer autoClose={3000} />
-      <FilmList films={films} />
+      {films && <FilmList films={films} />}
     </>
   );
 };

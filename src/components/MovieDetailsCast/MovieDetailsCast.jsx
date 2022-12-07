@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { apiURL, GeterFilmActorsTeam } from '../../components/api';
 import {
-  Image
+  Image, Text, WrapperActor
 } from './styled'
-// import PropTypes from 'prop-types';
+
 function MovieDetailsCast() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState('');
@@ -29,14 +29,15 @@ function MovieDetailsCast() {
       {cast
         ? cast.map(({ profile_path, original_name, character }) => {
             return (
-              <li key={original_name}>
+              
+              <WrapperActor key={original_name}>
                 <Image
                   src={profile_path ? apiURL + profile_path : 'Image not found'}
                   alt="actor"
                 />
-                ,<p>{original_name}</p>
-                <p>Character: {character}</p>
-              </li>
+                ,<Text>{original_name}</Text>
+                <Text>Character: {character}</Text>
+              </WrapperActor>
             );
           })
         : ''}

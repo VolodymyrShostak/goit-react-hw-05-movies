@@ -1,9 +1,7 @@
-// import PropTypes from 'prop-types';
-
-import { StyledLink } from './styled';
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { GeterTrendFilms } from '../api';
+import { StyledLink } from './styled';
 
 const FilmList = () => {
   const [films, setFilms] = useState([]);
@@ -38,7 +36,3 @@ const FilmList = () => {
   );
 };
 export default FilmList;
-// FilmList.propTypes = {
-//   pictures: PropTypes.array.isRequired,
-//   onClick: PropTypes.func.isRequired,
-// };

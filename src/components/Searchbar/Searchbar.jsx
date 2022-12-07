@@ -1,5 +1,6 @@
 import { useState } from 'react';
-// import PropTypes from 'prop-types';
+import { useSearchParams } from 'react-router-dom';
+
 import { toast } from 'react-toastify';
 import {
   WrapperSearchbar,
@@ -9,8 +10,10 @@ import {
   SearchFormButtonLabel,
 } from './styled.js';
 
-export const Searchbar = ({onSubmit}) => {
-  const [search, setSearch] = useState('');
+export const Searchbar = () => {
+  
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [search, setSearch] = useState(() => searchParams.get('query') ?? '');
 
   const onChange = e => {
     const { value } = e.currentTarget;
@@ -23,12 +26,12 @@ export const Searchbar = ({onSubmit}) => {
       toast.warning('Please, enter a keyword...');
       return;
     }
-    onSubmit(search)
+  
+     setSearchParams({ query: search });
+     setSearch('');
   };
 
-  // const onSubmit = ({ search }) => {
-  //   setSearch(search);
-  // };
+  
 
   return (
     <>
@@ -47,11 +50,11 @@ export const Searchbar = ({onSubmit}) => {
             autoFocus
             placeholder="Search movies"
           />
+          
         </SearchForm>
+       
       </WrapperSearchbar>
     </>
   );
 };
-// Searchbar.propTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-// };
+

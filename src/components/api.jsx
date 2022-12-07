@@ -1,4 +1,5 @@
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 export const apiURL = 'https://image.tmdb.org/t/p/w500';
 
@@ -44,8 +45,18 @@ export const GeterReviewsFilm = async movieId => {
   );
   return response;
 };
-
-
+GeterFilmsByKeyWord.propTypes = {
+  search: PropTypes.string.isRequired,
+};
+GeterFilmDetailsInfo.propTypes = {
+  search: PropTypes.string.isRequired,
+};
+GeterFilmActorsTeam.propTypes = {
+  search: PropTypes.string.isRequired,
+};
+GeterReviewsFilm.propTypes = {
+  search: PropTypes.string.isRequired,
+};
 
 
 
