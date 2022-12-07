@@ -18,7 +18,7 @@ function MovieDetails() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState('');
   const location = useLocation();
-  const linkBack = location.state.from;
+  const linkBack = location?.state?.from;
 
   useEffect(() => {
     async function getFilm(movieId) {
@@ -65,10 +65,10 @@ function MovieDetails() {
       )}
       <Title2>Additional Information</Title2>
       <WrapperLink>
-        <NavLink to="cast" state={{ from: location.state?.from }}>
+        <NavLink to="cast" state={{ from: location?.state?.from }}>
           Cast
         </NavLink>
-        <NavLink to="reviews" state={{ from: location.state?.from }}>
+        <NavLink to="reviews" state={{ from: location?.state?.from }}>
           Reviews
         </NavLink>
       </WrapperLink>
