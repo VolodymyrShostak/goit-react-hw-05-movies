@@ -26,25 +26,7 @@ function MovieDetailsCast() {
 
   return (
     <>
-      {!movie.length > 0 ? (
-        <h1>No casts</h1>
-      ) : (
-        <>
-          {cast.map(({ profile_path, original_name, character }) => {
-            return (
-              <WrapperActor key={original_name}>
-                <Image
-                  src={profile_path ? apiURL + profile_path : 'Image not found'}
-                  alt="actor"
-                />
-                ,<Text>{original_name}</Text>
-                <Text>Character: {character}</Text>
-              </WrapperActor>
-            );
-          })}
-        </>
-      )}
-      {/* {cast
+      {cast
         ? cast.map(({ profile_path, original_name, character }) => {
             return (
               <WrapperActor key={original_name}>
@@ -57,8 +39,10 @@ function MovieDetailsCast() {
               </WrapperActor>
             );
           })
-        : ''} */}
+        : ''}{' '}
+      
+      
     </>
-  );
-}
+  );}
+      
 export default MovieDetailsCast;
